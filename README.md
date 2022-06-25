@@ -1,17 +1,43 @@
 # Extract images from video in Python
 
-**Modules Needed:**
+### Required:
 
-```python
-import cv2
-import os
+1. opencv-python
+2. os (built-in module)
+3. argparse (built-in module)
+
+### Install required dependencies:
+
 ```
-**Module Installation - OpenCV (cv2):**
+pip install opencv-python
+```
 
-`>_ pip install opencv-python`
+### Usage:
 
----
+```
+python extractor.py --help
+```
 
-**screenshot:**
+```
+usage: extractor.py [-h] -p PATH video
 
-<img src='./screenshot/screenshot1.png'>
+a python script that extract images from video
+
+positional arguments:
+  video                 the video that you want to extract
+
+options:
+  -h, --help            show this help message and exit
+  -p PATH, --path PATH  the directory you want to store your extracted images
+
+```
+
+### Example:
+
+```
+python extractor.py --path extracted test.mp4 
+```
+*it was extracted 893 images from 30 second video from the above example*
+### Output:
+
+<img src='./screenshot/demo.png'>
