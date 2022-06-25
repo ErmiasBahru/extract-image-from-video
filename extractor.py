@@ -1,28 +1,45 @@
 import cv2
 import os
+import argparse
 
-vid = cv2.VideoCapture('./test.mp4')
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="a python script that extract images from video"
+    )
+    parser.add_argument("video", help="the video that you want to extract")
+    parser.add_argument("-p", "--path", help="the directory you want to store your extracted images", required=True)
+    args = parser.parse_args()
+    return args
 
-try:
-    if not os.path.exists('output'):
-        os.makedirs('output')
+if __name__ == "__main__":
 
-except OSError:
-    print('Error: while creating directory of output')
+    args = parse_args()
 
-currentFrame = 0
+    vid_file = args.video
+    vid = cv2.VideoCapture(vid_file)
 
-while True:
-    ret, frame = vid.read()
+    vid_path = args.path
 
-    if ret:
-        name = './output/frame' + str(currentFrame) + '.jpg'
-        print('creating..', name)
-        cv2.imwrite(name, frame)
+    try:
+        if not os.path.exists(vid_path):
+            os.mkdir(vid_path)
 
-        currentFrame += 1
-    else:
-        break
+    except OSError:
+        print('Error: while creating directory of output')
 
-vid.release()
-cv2.destroyAllWindows()
+    currentFrame = 0
+
+    while True:
+        ret, frame = vid.read()
+
+        if ret:
+            name = f'./{vid_path}/frame_' + str(currentFrame) + '.jpg'
+            print('creating..', name)
+            cv2.imwrite(name, frame)
+
+            currentFrame += 1
+        else:
+            break
+
+    vid.release()
+    cv2.destroyAllWindows()
