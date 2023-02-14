@@ -8,8 +8,7 @@ def parse_args():
     )
     parser.add_argument("video", help="the video that you want to extract")
     parser.add_argument("-p", "--path", help="the directory you want to store your extracted images", required=True)
-    args = parser.parse_args()
-    return args
+    return parser.parse_args()
 
 if __name__ == "__main__":
 
@@ -33,7 +32,7 @@ if __name__ == "__main__":
         ret, frame = vid.read()
 
         if ret:
-            name = f'./{vid_path}/frame_' + str(currentFrame) + '.jpg'
+            name = f'./{vid_path}/frame_{str(currentFrame)}.jpg'
             print('creating..', name)
             cv2.imwrite(name, frame)
 
